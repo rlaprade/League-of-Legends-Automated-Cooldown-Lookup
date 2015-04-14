@@ -1,0 +1,7 @@
+This project depends on the requests module (for python), which can be installed with pip.
+
+Before running, you must create a file named personal_data.py in this directory with the following fields:
+    my_key = <your Riot API key as a string>
+    name = <your summoner name as a string>
+
+Using python (tested with version 2.7), run cooldown_printer.py while you are in a game to lookup the ultimate cooldowns for all champions in your game.

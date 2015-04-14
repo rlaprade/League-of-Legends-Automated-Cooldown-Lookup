@@ -1,6 +1,5 @@
 import requests
 
-from personal_data import *
 from constants import *
 
 
@@ -47,19 +46,19 @@ class RiotAPI(object):
         ult = self._get_champion_ability_data(champion)[-1]
         return tuple(cd for cd in ult["cooldown"])
         
-    def get_ult_cooldowns_for_match(self, name):
-        """Returns a list of pairs of champion name and ultimate cooldowns for current match"""
-        allies, enemies = self.get_champions_in_match_by_team(name)
-        get_cds  = lambda champions: [(champion, self.get_ult_cooldowns(champion))
-                                        for champion in champions]
-        return get_cds(allies), get_cds(enemies)
+    # def get_ult_cooldowns_for_match(self, name):
+        # """Returns a list of pairs of champion name and ultimate cooldowns for current match"""
+        # allies, enemies = self.get_champions_in_match_by_team(name)
+        # get_cds  = lambda champions: [(champion, self.get_ult_cooldowns(champion))
+                                        # for champion in champions]
+        # return get_cds(allies), get_cds(enemies)
         
-    def print_ult_cooldowns_for_match(self, name):
-        allies, enemies = self.get_ult_cooldowns_for_match(name)
-        print("Ally team:")
-        self._print_ult_cooldowns(allies)
-        print("\nEnemy team:")
-        self._print_ult_cooldowns(enemies)
+    # def print_ult_cooldowns_for_match(self, name):
+        # allies, enemies = self.get_ult_cooldowns_for_match(name)
+        # print("Ally team:")
+        # self._print_ult_cooldowns(allies)
+        # print("\nEnemy team:")
+        # self._print_ult_cooldowns(enemies)
         
     def _request(self, api_url, params={}):
         args = {'api_key':  self.api_key}
@@ -134,18 +133,10 @@ class RiotAPI(object):
         """
         return self._current_match(name)["participants"]
         
-    def _print_ult_cooldowns(self, cd_info):        
-        for line in cd_info:
-            print("{champion}:  {cds}".format(champion=line[0], cds=line[1]))
+    # def _print_ult_cooldowns(self, cd_info):        
+        # for line in cd_info:
+            # print("{champion}:  {cds}".format(champion=line[0], cds=line[1]))
             
 class InputError(Exception):
     pass
-        
-def main():
-    requests.packages.urllib3.disable_warnings()  #Suppresses Insecure Connection warnings
-    api = RiotAPI(my_key)
-    api.print_ult_cooldowns_for_match("DyrudeJstorm RMX")
-    
-if __name__ == "__main__":
-    main()
         
